@@ -1,0 +1,393 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.0.7.3 (Linux)"/>
+	<meta name="created" content="2020-06-18T09:47:57.975783964"/>
+	<meta name="changed" content="2020-06-18T12:41:39.321338415"/>
+	<style type="text/css">
+		@page { margin: 2cm }
+		p { margin-bottom: 0.25cm; line-height: 115% }
+		h1 { margin-bottom: 0.21cm }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt }
+		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt }
+		h1.ctl { font-family: "Lohit Devanagari"; font-size: 18pt }
+		h3.western { font-family: "Liberation Sans", sans-serif; font-size: 14pt }
+		h3.cjk { font-family: "Noto Sans CJK SC"; font-size: 14pt }
+		h3.ctl { font-family: "Lohit Devanagari"; font-size: 14pt }
+	</style>
+</head>
+<body lang="en-CA" dir="ltr">
+<p align="center" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<h1 class="western">TLDR: How BackTrader Executes Code</h1>
+<h3 class="western"><i>Preonce, Once, Next, Init – Why Isn’t My
+Code Working?</i></h3>
+<p align="center" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<font face="Liberation Sans, sans-serif">Backtrader evolved from a
+backtesting only platform to a platform that performs real-time
+processing of data. It now has signal generation from strategies,
+optimization and trade execution. Because of this there are different
+ways for Backtrader to execute indicator code varying depending on
+whether or not the data is live or historical and preloaded. </font>
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><b>Coding
+for Backtesting:</b></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<font face="Liberation Sans, sans-serif">This is how Backtrader
+processes indicator code when backtesting preloaded data:</font></p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<font face="Liberation Sans, sans-serif">		By LINES						     By BARS</font></p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_f5f0c3e9feccda03.gif" align="left"/>
+<img src="Backtrader%20modes%20of%20execution_html_2dd041e3b1b369c1.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_7e8cd5531f239206.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_eb74df3d03fb53fd.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_890f5cec52b451c0.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_901d87fceec0d69f.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_49c2e881f8415d49.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<font face="Liberation Sans, sans-serif">		By BARS			<font size="5" style="font-size: 20pt"><b>
+</b></font>			    By BATCH</font></p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_f5f0c3e9feccda03.gif" align="left"/>
+<img src="Backtrader%20modes%20of%20execution_html_e86f725cef2649c.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_e20787eaf4b7ec1f.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><img src="Backtrader%20modes%20of%20execution_html_eb74df3d03fb53fd.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><img src="Backtrader%20modes%20of%20execution_html_1069b21a21b2a539.gif" align="left"/>
+<img src="Backtrader%20modes%20of%20execution_html_f65d8a8525b3f17.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><i><span style="font-weight: normal">That’s
+it – it doesn’t execute preonce, once, </span><span style="font-weight: normal">unless
+it’s running the once routine</span><span style="font-weight: normal">
+</span><span style="font-weight: normal"> for this mode of execution.
+</span><span style="font-weight: normal">And </span><span style="font-weight: normal">when
+running once it doesn’t</span><span style="font-weight: normal">
+run init or next. </span><span style="font-weight: normal">And when
+running init and/or next it is not running once(). </span><span style="font-weight: normal">For
+simplicity this diagram excludes prenext and similar.</span></i></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">So
+y</span><span style="font-weight: normal">ou </span><span style="font-weight: normal">have</span><span style="font-weight: normal">
+your file of stored data with timestamps and imported it with
+read_csv and adddata as various </span><span style="font-weight: normal">online
+</span><span style="font-weight: normal">examples show. </span><span style="font-weight: normal">You
+have your timestamps in UTC time and you made sure that they are
+going from earliest to latest so that backtrader doesn’t try to
+start from the future. Great! You code your routine in next() so that
+it executes at each bar. </span></font>
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">...and
+it runs!</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">Fantastic!
+But it’s slow. </span><span style="font-weight: normal">So you add
+some preconfiguration in once() to help it along a bit.</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">And
+it explodes. </span><span style="font-weight: normal">You might think
+“i</span><span style="font-weight: normal">s this platform broken?”
+Why isn’t once running when the bars have reached the minimum
+period and then next running for each bar? Why? Because that’s not
+what backtrader is designed to do. Once is only for backtesting.
+</span><span style="font-weight: normal">Isolated on its own with its
+brothers preonce, oncestart, etc.</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">So,
+fine, you move all your code to the once routine but... wait... you
+spend hours diagnosing only to find out that init() didn’t run and
+none of your variables are declared/setup/initialized. </span><span style="font-weight: normal">And
+where are your precalculated lines from init()? </span><span style="font-weight: normal">Why
+don’t they exist?</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">Because
+that’s not the code path when Backtrader runs the once routine.</span><span style="font-weight: normal">
+</span><span style="font-weight: normal">And backtrader will pick
+which routines to run depending on how the data is supplied. You can
+force this path by using the runonce flag in cerebro.run().</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><b>Coding
+for Real Time Live Data:</b></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<font face="Liberation Sans, sans-serif">This is how Backtrader sees
+code when running against live real time data:</font></p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<font face="Liberation Sans, sans-serif">		By BARS						BY LINES				</font></p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_f5f0c3e9feccda03.gif" align="left"/>
+<img src="Backtrader%20modes%20of%20execution_html_bf748b6541a8d87a.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+<img src="Backtrader%20modes%20of%20execution_html_e20787eaf4b7ec1f.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><img src="Backtrader%20modes%20of%20execution_html_e20787eaf4b7ec1f.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><img src="Backtrader%20modes%20of%20execution_html_ea7babf0ca0c3f88.gif" align="left"/>
+<img src="Backtrader%20modes%20of%20execution_html_fdc1606c709c059f.gif" align="left"/>
+<br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">Now
+you put it to work on real-time code and absolutely nothing happens.
+Again, once is only for preloaded data for backtesting. </span><span style="font-weight: normal">In
+real-time, Backtrader will run init and next to process bars.</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">A</span><span style="font-weight: normal">nother
+mistake is to put lines calculations for an indicator in init() and
+then have additional bar-by-bar calculations for the </span><b>same</b><span style="font-weight: normal">
+lines object in next(). Because Backtrader calculates the lines
+object each bar and triggers this with a timer this will not work.</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">Y</span><span style="font-weight: normal">ou
+can create both once and init/next, but one will run when backtrader
+detects preloaded data, and one will run in live sessions. This can
+be useful for batch processing before live trading but you have to be
+certain that the code logic is duplicated and identical between once
+and next </span><span style="font-weight: normal">or you’ll have
+different results in backtesting than live data.</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><span style="font-weight: normal">W</span><span style="font-weight: normal">hat
+if data is real-time but backfilled with pre-stored data from a file?
+Then the real-time execution pathway of init/next will occur.</span></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><font face="Liberation Sans, sans-serif"><i><span style="font-weight: normal">Written
+by B. Bradford June 18, 2020</span></i></font></p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="left" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p align="center" style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+</body>
+</html>
